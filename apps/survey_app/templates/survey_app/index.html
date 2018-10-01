@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title></title>
+	</head>
+	<body>
+		<h1>Super Awesome Survey</h1>
+		<form action="/process" method="POST">
+			{% csrf_token %}
+			{{ request.session.name }}
+			<p>Name: <input type="text" name="name" value = "{{ request.session.name }}"></p>
+			<p>Language: <select name="language">
+				<option>Python</option>
+				<option>C++</option>
+				<option>JavaScript</option>
+				<option>Java</option>
+				<option>Ruby</option>
+			</select></p>
+			<p>Location: <select name="location">
+				<option>Loc 1</option>
+				<option>Loc 2</option>
+				<option>Loc 3</option>
+				<option>Loc 4</option>
+			</select></p>
+			<p>Comment (Optional):</br>
+				<textarea name="comment" rows="5" columns="30"></textarea>
+			</p>
+			<input type="submit">
+
+			{% if messages %}
+				<ul class="messages">
+					{% for message in messages %}
+						<li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+					{% endfor %}
+				</ul>
+			{% endif %}
+		</form>
+	</body>
+</html>
